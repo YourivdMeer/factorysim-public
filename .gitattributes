@@ -1,0 +1,12 @@
+# Line endings (plan 23): text is stored with LF; each checkout uses its own setting.
+* text=auto
+
+# Scripts that bash runs keep LF on every pc.
+*.sh text eol=lf
+
+# Binary: never touch line endings, never diff as text.
+*.glb binary
+*.blend binary
+*.png binary
+*.jpg binary
+*.ico binary

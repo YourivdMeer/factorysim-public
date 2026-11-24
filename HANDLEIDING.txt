@@ -1,0 +1,62 @@
+FactorySim - korte handleiding (versie 0.1.0-beta.1)
+
+FactorySim is een 3D-fabriek op je eigen pc die je met een PLC-programma bestuurt. Je hebt er geen echte
+hardware voor nodig. Je versie staat in de titelbalk en in het venster Over (menu "Help ▾" rechtsboven, "Over FactorySim").
+
+
+Starten
+  - Start FactorySim.exe. De eerste keer opent de voorbeeldscene "MVP - sorteren op hoogte" met een
+    welkomstvenster. Dat venster vind je later terug via het menu "Help ▾" rechtsboven, "Aan de slag".
+  - In een minuut een draaiende lijn:
+      1. Klik rechtsboven op "PLC: niet verbonden" en dan op "Ingebouwde test-PLC".
+      2. Klik "▶ Run" (de simulatie loopt) en daarna "Start" (de startknop van de installatie).
+      3. De dozen komen op de band; de hoge duwt de pusher de zijbaan in.
+  - "⏸ Pause" zet alles stil, "⟲ Reset" haalt de dozen weg. Met "+" en "−" gaat de tijd sneller of trager.
+  - Het menu "Help ▾" rechtsboven, "Sneltoetsen en muis", toont de sneltoetsen en de muisbediening.
+  - Daarna opent FactorySim de scene van de vorige keer, met dezelfde camera en PLC-instellingen.
+
+
+Een scène bouwen
+  - Klik "✎ Ontwerpen". Links staat de library met onderdelen: klik er een aan en klik op de vloer.
+  - Klik op een onderdeel om het te kiezen; slepen verplaatst het, R draait het 90°, Delete haalt het weg.
+    Een band die je tegen het eind van een andere sleept, klikt eraan vast.
+  - Rechts staan de eigenschappen van het gekozen onderdeel, zoals de tagnamen en de Modbus-adressen.
+  - "Scène ▾" heeft onder meer Nieuw, Opslaan, Openen… (met de voorbeelden), Exporteren… en Importeren….
+  - Klik "▶ Simuleren" om de scène te laten draaien. Onderin staan de tabbladen Tags, I/O-lijst, Trace
+    en Cijfers. In Tags kun je met de kolom Force een tag vast op 0 of 1 zetten, ook zonder PLC.
+
+
+Een PLC koppelen
+  - Ingebouwde test-PLC: "PLC: niet verbonden" → "Ingebouwde test-PLC". Hij sorteert alleen de
+    MVP-scene en is bedoeld om te zien hoe het werkt.
+  - Je eigen PLC via Modbus TCP, bijvoorbeeld CODESYS Control Win V3 op deze pc: vul in het PLC-venster
+    host 127.0.0.1, poort 502 en Unit ID 255 (of 0) in en klik "Verbinden". FactorySim is de client,
+    de PLC de server.
+  - Welke coils en registers bij welke tag horen, staat in het tabblad I/O-lijst. "Exporteer CSV" en
+    "Exporteer GVL" schrijven de taglijst en een GVL met alle variabelen die je in CODESYS kunt plakken.
+  - Verbind nooit met een PLC die echte machines aanstuurt. Modbus TCP heeft geen beveiliging.
+
+
+Waar je bestanden staan
+  Het venster Over toont de mappen, met een knop "Map openen". Op Windows is dat onder
+  %APPDATA%\Godot\app_userdata\FactorySim\:
+  - scenes\     je eigen scenes
+  - autosave\   automatisch opgeslagen kopieën (de nieuwste drie per scene)
+  - logs\       het log van de app (godot.log) en na een crash crash-<datum>-<tijd>.txt; stuur die mee
+                als je een fout meldt. Een fout staat ook onderin de statusregel; "Details" opent het log.
+  - settings.cfg   wat de app onthoudt (scene, camera, PLC-velden, venster). Weg = eerste start opnieuw.
+  Exports (tagmap.csv, iolist.csv, IO.gvl.st, trace.csv, stats.csv) komen in dezelfde map.
+
+
+Bekende beperkingen
+  - Dit is een beta. Bewaar een kopie van scenes die je belangrijk vindt (Scène ▾ → Exporteren).
+  - De koppeling met CODESYS Control Win V3 is gebouwd, maar nog niet met een echte CODESYS getest.
+  - Projecten van CoDeSys V2.3 (.exp) kun je nog niet inladen.
+  - De ingebouwde test-PLC sorteert alleen de MVP-scene; voor andere scenes heb je een eigen PLC nodig.
+    In een andere scene staat de knop uit.
+  - Alleen Windows. De bediening met muis en toetsenbord is nog niet volledig met de hand nagelopen.
+  - FactorySim verstuurt niets naar internet. Modbus en de test-API werken alleen op 127.0.0.1, tenzij je
+    zelf een andere computer kiest.
+
+CODESYS is een merk van CODESYS GmbH; FactorySim heeft geen band met CODESYS GmbH.
+De licenties van Godot Engine, .NET en NModbus staan in THIRD-PARTY-NOTICES.txt.

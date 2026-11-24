@@ -1,0 +1,19 @@
+{
+  "format": "factorysim-block",
+  "version": 1,
+  "name": "Pusherstation",
+  "description": "Band van 6 m met rails, een pusher, twee photo-eyes (laag en hoog) en een zijbaan, zoals in de MVP-scène. Zet er een emitter en twee removers bij.",
+  "items": [
+    {"id": "main-belt", "asset": "conveyor_straight_6m", "name": "Conveyor", "position": [-0.5, 0.8, -0.25], "yaw": 0},
+    {"id": "side-lane", "asset": "conveyor_straight_1m6_wide", "name": "Side lane", "position": [0.5, 0.79, 0.95], "yaw": 270, "params": {"alwaysOn": 1}},
+    {"id": "rail-back-a", "asset": "guide_rail_1m", "name": "Rail back A", "position": [-1.675, 0.84, -0.67], "yaw": 0, "params": {"length": 3.65, "bracketSide": 1}},
+    {"id": "rail-back-b", "asset": "guide_rail_1m", "name": "Rail back B", "position": [1.675, 0.84, -0.67], "yaw": 0, "params": {"length": 1.65, "bracketSide": 1}},
+    {"id": "rail-front-a", "asset": "guide_rail_1m", "name": "Rail front A", "position": [-1.8, 0.84, 0.17], "yaw": 0, "params": {"length": 3.4, "bracketSide": -1}},
+    {"id": "rail-front-b", "asset": "guide_rail_1m", "name": "Rail front B", "position": [1.8, 0.84, 0.17], "yaw": 0, "params": {"length": 1.4, "bracketSide": -1}},
+    {"id": "lane-rail-a", "asset": "guide_rail_1m", "name": "Lane rail A", "position": [-0.12, 0.84, 0.97], "yaw": 270, "params": {"length": 1.56, "bracketSide": -1}},
+    {"id": "lane-rail-b", "asset": "guide_rail_1m", "name": "Lane rail B", "position": [1.12, 0.84, 0.97], "yaw": 270, "params": {"length": 1.56, "bracketSide": 1}},
+    {"id": "pusher", "asset": "pusher", "name": "Pusher", "position": [0.5, 0.945, -0.73], "yaw": 0},
+    {"id": "eye-low", "asset": "diffuse_sensor", "name": "At pusher", "position": [0.6, 0.9, -0.85], "yaw": 0, "params": {"range": 1.0}},
+    {"id": "eye-high", "asset": "diffuse_sensor", "name": "High box", "position": [0.6, 1.075, -0.85], "yaw": 0, "params": {"range": 1.0, "post": 0}}
+  ]
+}

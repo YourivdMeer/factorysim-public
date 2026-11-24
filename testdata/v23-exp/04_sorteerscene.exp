@@ -1,0 +1,161 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PLC_PRG
+VAR
+	bRun		: BOOL;				(* installatie in bedrijf *)
+	nStep		: INT := 0;			(* 0 = transport, 10 = duwen, 20 = terug *)
+	tonPush		: TON;				(* bewaking: pusher haalt eindstand niet *)
+	bFault		: BOOL;
+	nSorted		: UINT;				(* aantal uitgesorteerde dozen *)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(* --- Start/stop: stop dominant, alleen als de simulatie draait --- *)
+IF iStop OR NOT iSimRunning OR bFault THEN
+	bRun := FALSE;
+ELSIF iStart THEN
+	bRun := TRUE;
+END_IF;
+
+(* Fout resetten met Start terwijl Stop is losgelaten *)
+IF bFault AND iStart AND NOT iStop THEN
+	bFault := FALSE;
+	nStep := 0;
+END_IF;
+
+(* --- Sorteerstap --- *)
+CASE nStep OF
+	0:	(* transport *)
+		IF bRun AND iAtPusher AND iHighBox AND iPusherBack THEN
+			nStep := 10;
+		END_IF;
+	10:	(* band stil, pusher uit *)
+		IF iPusherFront THEN
+			nSorted := nSorted + 1;
+			nStep := 20;
+		END_IF;
+	20:	(* pusher terug *)
+		IF iPusherBack THEN
+			nStep := 0;
+		END_IF;
+END_CASE;
+
+(* Bewaking: pusher moet binnen 3 s zijn eindstand halen *)
+tonPush(IN := (nStep = 10) OR (nStep = 20), PT := T#3s);
+IF tonPush.Q THEN
+	bFault := TRUE;
+	nStep := 0;
+END_IF;
+
+(* --- Uitgangen --- *)
+oConveyor := bRun AND (nStep = 0);
+oPusher := (nStep = 10);
+oEmitter := bRun;
+oRunLamp := bRun;
+wSorted := UINT_TO_WORD(nSorted);
+END_PROGRAM
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @GLOBAL_VARIABLE_LIST := 'Globale_Variablen' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+VAR_GLOBAL
+	(* Ingangen *)
+	iStart			AT %IX0.0 : BOOL;	(* startknop *)
+	iStop			AT %IX0.1 : BOOL;	(* stopknop *)
+	iAtPusher		AT %IX0.2 : BOOL;	(* photo-eye bij de pusher *)
+	iHighBox		AT %IX0.3 : BOOL;	(* hoge photo-eye *)
+	iPusherBack		AT %IX0.4 : BOOL;	(* pusher ingetrokken *)
+	iPusherFront	AT %IX0.5 : BOOL;	(* pusher uitgeschoven *)
+	iSimRunning		AT %IX0.6 : BOOL;	(* simulatie draait *)
+
+	(* Uitgangen *)
+	oConveyor		AT %QX0.0 : BOOL;	(* band aan *)
+	oPusher			AT %QX0.1 : BOOL;	(* pusher uit *)
+	oEmitter		AT %QX0.2 : BOOL;	(* dozen spawnen *)
+	oRunLamp		AT %QX0.3 : BOOL;	(* lamp in bedrijf *)
+	wSorted			AT %QW2 : WORD;		(* teller *)
+END_VAR
+
+(* @OBJECT_END := 'Globale_Variablen' *)
+(* @CONNECTIONS := Globale_Variablen
+FILENAME : ''
+FILETIME : 0
+EXPORT : 0
+NUMOFCONNECTIONS : 0
+*)
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @GLOBAL_VARIABLE_LIST := 'Variablen_Konfiguration' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+VAR_CONFIG
+END_VAR
+
+(* @OBJECT_END := 'Variablen_Konfiguration' *)
+(* @CONNECTIONS := Variablen_Konfiguration
+FILENAME : ''
+FILETIME : 0
+EXPORT : 0
+NUMOFCONNECTIONS : 0
+*)
+
+LIBRARY
+Standard.lib 2.12.10 14:48:34
+(* @LIBRARYSYMFILEINFO := '0' *)
+NumOfPOUs: 26
+ASCIIBYTE_TO_STRING: 2048
+CONCAT: 0
+CTD: 0
+CTU: 0
+CTUD: 0
+DELETE: 0
+F_TRIG: 0
+FIND: 0
+INSERT: 0
+LEFT: 0
+LEN: 0
+MID: 0
+R_TRIG: 0
+REAL_STATE: 2048
+REPLACE: 0
+RIGHT: 0
+RS: 0
+RTC: 0
+SEMA: 0
+SR: 0
+STANDARD_VERSION: 2048
+STRING_COMPARE: 2048
+STRING_TO_ASCIIBYTE: 2048
+TOF: 0
+TON: 0
+TP: 0
+NumOfGVLs: 1
+'Global Variables 0': 0
+END_LIBRARY
+
+PLC_CONFIGURATION
+_GLOBAL
+_VERSION: 3
+_AUTOADR: 0
+_CHECKADR: 0
+_SAVECONFIGFILESINPROJECT: 0
+_END_GLOBAL
+
+_MODULE: '3S'
+_SECTION_NAME: 'Root'
+_INDEX_IN_PARENT: '-1'
+_MODULE_NAME: 'Hardware configuration'
+_NODE_ID: -1
+_IECIN: %IB0
+_IECOUT: %QB0
+_IECDIAG: %MB0
+_DOWNLOAD: 1
+_EXCLUDEFROMAUTOADR: 0
+_COMMENT: ''
+_END_MODULE
+PLC_END

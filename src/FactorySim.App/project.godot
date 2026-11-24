@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="FactorySim"
+config/version="0.1.0-beta.1"
+run/main_scene="res://Main.tscn"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
+boot_splash/bg_color=Color(0.13, 0.15, 0.18, 1)
+boot_splash/image="res://branding/splash.png"
+boot_splash/stretch_mode=0
+boot_splash/minimum_display_time=0
+config/icon="res://branding/icon.svg"
+config/windows_native_icon="res://branding/icon.ico"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+
+[dotnet]
+
+project/assembly_name="FactorySim.App"
+
+[physics]
+
+common/physics_ticks_per_second=120
+3d/physics_engine="Jolt Physics"

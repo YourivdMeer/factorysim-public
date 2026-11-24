@@ -1,0 +1,38 @@
+{
+  "format": "factorysim-scene",
+  "version": 1,
+  "name": "MVP — sorteren op hoogte",
+  "description": "Het eerste voorbeeld: een band met een pusher die hoge dozen naar de zijbaan duwt. Twee photo-eyes zien of er een doos is en of hij hoog is; de lage dozen rijden door naar het eind.",
+  "items": [
+    { "id": "main-belt", "asset": "conveyor_straight_6m", "name": "Conveyor", "position": [0.0, 0.8, 0.0], "yaw": 0 },
+    { "id": "side-lane", "asset": "conveyor_straight_1m6_wide", "name": "Side lane", "position": [1.0, 0.79, 1.2], "yaw": 270, "params": { "alwaysOn": 1 } },
+
+    { "id": "rail-back-a", "asset": "guide_rail_1m", "name": "Rail back A", "position": [-1.175, 0.84, -0.42], "yaw": 0, "params": { "length": 3.65, "bracketSide": 1 } },
+    { "id": "rail-back-b", "asset": "guide_rail_1m", "name": "Rail back B", "position": [2.175, 0.84, -0.42], "yaw": 0, "params": { "length": 1.65, "bracketSide": 1 } },
+    { "id": "rail-front-a", "asset": "guide_rail_1m", "name": "Rail front A", "position": [-1.3, 0.84, 0.42], "yaw": 0, "params": { "length": 3.4, "bracketSide": -1 } },
+    { "id": "rail-front-b", "asset": "guide_rail_1m", "name": "Rail front B", "position": [2.3, 0.84, 0.42], "yaw": 0, "params": { "length": 1.4, "bracketSide": -1 } },
+    { "id": "lane-rail-a", "asset": "guide_rail_1m", "name": "Lane rail A", "position": [0.38, 0.84, 1.22], "yaw": 270, "params": { "length": 1.56, "bracketSide": -1 } },
+    { "id": "lane-rail-b", "asset": "guide_rail_1m", "name": "Lane rail B", "position": [1.62, 0.84, 1.22], "yaw": 270, "params": { "length": 1.56, "bracketSide": 1 } },
+
+    { "id": "pusher", "asset": "pusher", "name": "Pusher", "position": [1.0, 0.945, -0.48], "yaw": 0 },
+    { "id": "eye-low", "asset": "diffuse_sensor", "name": "At pusher", "position": [1.1, 0.9, -0.6], "yaw": 0, "params": { "range": 1.0 } },
+    { "id": "eye-high", "asset": "diffuse_sensor", "name": "High box", "position": [1.1, 1.075, -0.6], "yaw": 0, "params": { "range": 1.0, "post": 0 } },
+
+    { "id": "emitter", "asset": "emitter_gantry", "name": "Emitter", "position": [-2.6, 0.8, 0.0], "yaw": 0, "params": { "interval": 2.5, "seed": 1 } },
+    { "id": "end-remover", "asset": "remover_hood_1m0", "name": "End remover", "position": [3.3, 0.8, 0.0], "yaw": 0 },
+    { "id": "lane-remover", "asset": "remover_hood_1m4", "name": "Lane remover", "position": [1.0, 0.8, 2.5], "yaw": 270 }
+  ],
+  "tags": [
+    { "name": "Start button", "direction": "Sensor", "area": "Coil", "offset": 0, "iecAddress": "%IX0.0", "variable": "IO.iStart", "description": "Startknop (puls)" },
+    { "name": "Stop button", "direction": "Sensor", "area": "Coil", "offset": 1, "iecAddress": "%IX0.1", "variable": "IO.iStop", "description": "Stopknop (TRUE = ingedrukt)" },
+    { "name": "At pusher", "direction": "Sensor", "area": "Coil", "offset": 2, "iecAddress": "%IX0.2", "variable": "IO.iAtPusher", "description": "Photo-eye: doos voor de pusher" },
+    { "name": "High box", "direction": "Sensor", "area": "Coil", "offset": 3, "iecAddress": "%IX0.3", "variable": "IO.iHighBox", "description": "Hoge photo-eye: doos is hoog" },
+    { "name": "Pusher back", "direction": "Sensor", "area": "Coil", "offset": 4, "iecAddress": "%IX0.4", "variable": "IO.iPusherBack", "description": "Pusher ingetrokken" },
+    { "name": "Pusher front", "direction": "Sensor", "area": "Coil", "offset": 5, "iecAddress": "%IX0.5", "variable": "IO.iPusherFront", "description": "Pusher uitgeschoven" },
+    { "name": "Sim running", "direction": "Sensor", "area": "Coil", "offset": 6, "iecAddress": "%IX0.6", "variable": "IO.iSimRunning", "description": "Simulatie draait (niet gepauzeerd)" },
+    { "name": "Conveyor", "direction": "Actuator", "area": "DiscreteInput", "offset": 0, "iecAddress": "%QX0.0", "variable": "IO.oConveyor", "description": "Band aan" },
+    { "name": "Pusher", "direction": "Actuator", "area": "DiscreteInput", "offset": 1, "iecAddress": "%QX0.1", "variable": "IO.oPusher", "description": "Pusher uitschuiven (monostabiel)" },
+    { "name": "Emitter", "direction": "Actuator", "area": "DiscreteInput", "offset": 2, "iecAddress": "%QX0.2", "variable": "IO.oEmitter", "description": "Dozen spawnen" },
+    { "name": "Run lamp", "direction": "Actuator", "area": "DiscreteInput", "offset": 3, "iecAddress": "%QX0.3", "variable": "IO.oRunLamp", "description": "Lamp in bedrijf" }
+  ]
+}

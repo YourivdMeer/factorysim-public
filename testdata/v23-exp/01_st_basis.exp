@@ -1,0 +1,63 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PLC_PRG
+VAR
+	bRun		: BOOL;				(* installatie in bedrijf *)
+	nStarts		: UINT := 0;		(* aantal keer gestart *)
+	bStartOud	: BOOL;				(* vorige toestand startknop *)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(* Start/stop met stop dominant; alleen als de simulatie draait *)
+IF iStop OR NOT iSimRunning THEN
+	bRun := FALSE;
+ELSIF iStart THEN
+	bRun := TRUE;
+END_IF;
+
+(* Stijgende flank van de startknop tellen, zonder library *)
+IF iStart AND NOT bStartOud THEN
+	nStarts := nStarts + 1;
+END_IF;
+bStartOud := iStart;
+
+(* Band loopt tot er een doos voor de pusher staat *)
+oConveyor := bRun AND NOT iAtPusher;
+oEmitter := bRun;
+oRunLamp := bRun;
+oPusher := FALSE;
+wStarts := nStarts;
+END_PROGRAM
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @GLOBAL_VARIABLE_LIST := 'Globale_Variablen' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+VAR_GLOBAL
+	(* Ingangen: sensoren en knoppen *)
+	iStart			AT %IX0.0 : BOOL;	(* startknop *)
+	iStop			AT %IX0.1 : BOOL;	(* stopknop *)
+	iAtPusher		AT %IX0.2 : BOOL;	(* photo-eye bij de pusher *)
+	iHighBox		AT %IX0.3 : BOOL;	(* hoge photo-eye *)
+	iPusherBack		AT %IX0.4 : BOOL;	(* pusher ingetrokken *)
+	iPusherFront	AT %IX0.5 : BOOL;	(* pusher uitgeschoven *)
+	iSimRunning		AT %IX0.6 : BOOL;	(* simulatie draait *)
+
+	(* Uitgangen: actuatoren *)
+	oConveyor		AT %QX0.0 : BOOL;	(* band aan *)
+	oPusher			AT %QX0.1 : BOOL;	(* pusher uit *)
+	oEmitter		AT %QX0.2 : BOOL;	(* dozen spawnen *)
+	oRunLamp		AT %QX0.3 : BOOL;	(* lamp in bedrijf *)
+	wStarts			AT %QW2 : WORD;		(* teller naar buiten *)
+END_VAR
+
+(* @OBJECT_END := 'Globale_Variablen' *)
+(* @CONNECTIONS := Globale_Variablen
+FILENAME : ''
+FILETIME : 0
+EXPORT : 0
+NUMOFCONNECTIONS : 0
+*)

@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactorySim.App", "FactorySim.App.csproj", "{FBB1501C-342F-4B3F-B69C-9D5912614CB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactorySim.Core", "..\FactorySim.Core\FactorySim.Core.csproj", "{0BCBDD07-70A8-4C63-8094-1F585923E25E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBB1501C-342F-4B3F-B69C-9D5912614CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB1501C-342F-4B3F-B69C-9D5912614CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB1501C-342F-4B3F-B69C-9D5912614CB3}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{FBB1501C-342F-4B3F-B69C-9D5912614CB3}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{FBB1501C-342F-4B3F-B69C-9D5912614CB3}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{FBB1501C-342F-4B3F-B69C-9D5912614CB3}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{0BCBDD07-70A8-4C63-8094-1F585923E25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCBDD07-70A8-4C63-8094-1F585923E25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCBDD07-70A8-4C63-8094-1F585923E25E}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCBDD07-70A8-4C63-8094-1F585923E25E}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCBDD07-70A8-4C63-8094-1F585923E25E}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{0BCBDD07-70A8-4C63-8094-1F585923E25E}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

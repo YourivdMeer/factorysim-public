@@ -1,0 +1,157 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Types' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE eStap :
+(
+	TRANSPORT,
+	DUWEN,
+	TERUG
+);
+END_TYPE
+(* @END_DECLARATION := '0' *)
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Types' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE stTellers :
+STRUCT
+	nLaag		: UINT;			(* doorgelaten dozen *)
+	nHoog		: UINT;			(* uitgesorteerde dozen *)
+	rAandeel	: REAL;			(* aandeel hoog in procent *)
+END_STRUCT
+END_TYPE
+(* @END_DECLARATION := '0' *)
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Hulp' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION Aandeel : REAL
+VAR_INPUT
+	nDeel		: UINT;
+	nTotaal		: UINT;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF nTotaal = 0 THEN
+	Aandeel := 0.0;
+ELSE
+	Aandeel := UINT_TO_REAL(nDeel) * 100.0 / UINT_TO_REAL(nTotaal);
+END_IF;
+END_FUNCTION
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Hulp' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_Sorteerder
+VAR_INPUT
+	bVrijgave	: BOOL;
+	bDoos		: BOOL;
+	bHoog		: BOOL;
+	bAchter		: BOOL;
+	bVoor		: BOOL;
+END_VAR
+VAR_OUTPUT
+	bBand		: BOOL;
+	bDuw		: BOOL;
+	stTel		: stTellers;
+END_VAR
+VAR
+	eToestand	: eStap := TRANSPORT;
+	bDoosOud	: BOOL;
+	aLaatste	: ARRAY [0..3] OF BOOL;		(* laatste vier dozen: TRUE = hoog *)
+	i			: INT;
+END_VAR
+(* @END_DECLARATION := '0' *)
+CASE eToestand OF
+	TRANSPORT:
+		IF bVrijgave AND bDoos AND NOT bDoosOud THEN
+			(* nieuwe doos: geschiedenis opschuiven *)
+			FOR i := 3 TO 1 BY -1 DO
+				aLaatste[i] := aLaatste[i - 1];
+			END_FOR;
+			aLaatste[0] := bHoog;
+			IF bHoog AND bAchter THEN
+				eToestand := DUWEN;
+			ELSE
+				stTel.nLaag := stTel.nLaag + 1;
+			END_IF;
+		END_IF;
+	DUWEN:
+		IF bVoor THEN
+			stTel.nHoog := stTel.nHoog + 1;
+			eToestand := TERUG;
+		END_IF;
+	TERUG:
+		IF bAchter THEN
+			eToestand := TRANSPORT;
+		END_IF;
+END_CASE;
+bDoosOud := bDoos;
+
+stTel.rAandeel := Aandeel(stTel.nHoog, stTel.nHoog + stTel.nLaag);
+bBand := bVrijgave AND (eToestand = TRANSPORT);
+bDuw := (eToestand = DUWEN);
+END_FUNCTION_BLOCK
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PLC_PRG
+VAR
+	bRun		: BOOL;
+	fbSort		: FB_Sorteerder;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF iStop OR NOT iSimRunning THEN
+	bRun := FALSE;
+ELSIF iStart THEN
+	bRun := TRUE;
+END_IF;
+
+fbSort(
+	bVrijgave := bRun,
+	bDoos := iAtPusher,
+	bHoog := iHighBox,
+	bAchter := iPusherBack,
+	bVoor := iPusherFront);
+
+oConveyor := fbSort.bBand;
+oPusher := fbSort.bDuw;
+oEmitter := bRun;
+oRunLamp := bRun;
+wHoog := UINT_TO_WORD(fbSort.stTel.nHoog);
+wLaag := UINT_TO_WORD(fbSort.stTel.nLaag);
+END_PROGRAM
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @GLOBAL_VARIABLE_LIST := 'Globale_Variablen' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+VAR_GLOBAL
+	iStart			AT %IX0.0 : BOOL;
+	iStop			AT %IX0.1 : BOOL;
+	iAtPusher		AT %IX0.2 : BOOL;
+	iHighBox		AT %IX0.3 : BOOL;
+	iPusherBack		AT %IX0.4 : BOOL;
+	iPusherFront	AT %IX0.5 : BOOL;
+	iSimRunning		AT %IX0.6 : BOOL;
+
+	oConveyor		AT %QX0.0 : BOOL;
+	oPusher			AT %QX0.1 : BOOL;
+	oEmitter		AT %QX0.2 : BOOL;
+	oRunLamp		AT %QX0.3 : BOOL;
+	wHoog			AT %QW2 : WORD;
+	wLaag			AT %QW3 : WORD;
+END_VAR
+
+(* @OBJECT_END := 'Globale_Variablen' *)
+(* @CONNECTIONS := Globale_Variablen
+FILENAME : ''
+FILETIME : 0
+EXPORT : 0
+NUMOFCONNECTIONS : 0
+*)

@@ -1,0 +1,87 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Niet_bereikbaar' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_Ongebruikt
+VAR
+	pWaarde		: POINTER TO INT;
+	nWaarde		: INT;
+END_VAR
+(* @END_DECLARATION := '0' *)
+(* Wordt nergens aangeroepen: hoort alleen een waarschuwing te geven *)
+pWaarde := ADR(nWaarde);
+pWaarde^ := pWaarde^ + 1;
+END_FUNCTION_BLOCK
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PLC_PRG
+VAR
+	bRun		: BOOL;
+	fbKaart		: VendorAnalogIn;		(* FB uit een library zonder bron *)
+	pTeller		: POINTER TO WORD;		(* pointer: niet ondersteund in B1 *)
+	nGrootte	: INT;
+END_VAR
+VAR RETAIN
+	nTotaal		: UDINT;				(* RETAIN: waarschuwing *)
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF iStop THEN
+	bRun := FALSE;
+ELSIF iStart THEN
+	bRun := TRUE;
+END_IF;
+
+(* 1. Aanroep van een library-POU waarvan de implementatie ontbreekt *)
+fbKaart(xEnable := bRun, wKanaal := 1);
+
+(* 2. Pointer en adresoperator *)
+pTeller := ADR(wTeller);
+pTeller^ := pTeller^ + 1;
+
+(* 3. SIZEOF en bit-toegang op een woord *)
+nGrootte := SIZEOF(wTeller);
+oRunLamp := wTeller.0;
+
+nTotaal := nTotaal + 1;
+oConveyor := bRun AND fbKaart.xValid;
+END_PROGRAM
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @GLOBAL_VARIABLE_LIST := 'Globale_Variablen' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+VAR_GLOBAL
+	iStart			AT %IX0.0 : BOOL;
+	iStop			AT %IX0.1 : BOOL;
+	iNietGekoppeld	AT %IX7.3 : BOOL;	(* adres zonder sim-tag: waarschuwing *)
+
+	oConveyor		AT %QX0.0 : BOOL;
+	oRunLamp		AT %QX0.3 : BOOL;
+	wTeller			AT %MW10 : WORD;
+END_VAR
+
+(* @OBJECT_END := 'Globale_Variablen' *)
+(* @CONNECTIONS := Globale_Variablen
+FILENAME : ''
+FILETIME : 0
+EXPORT : 0
+NUMOFCONNECTIONS : 0
+*)
+
+_ONBEKEND_BLOK
+_DIT_BLOK : 'bestaat niet in CoDeSys; test dat de parser onbekende blokken meldt'
+_END_ONBEKEND_BLOK
+
+LIBRARY
+VendorIO.lib 1.0.0 12:00:00
+(* @LIBRARYSYMFILEINFO := '0' *)
+NumOfPOUs: 2
+VendorAnalogIn: 0
+VendorAnalogOut: 0
+NumOfGVLs: 0
+END_LIBRARY

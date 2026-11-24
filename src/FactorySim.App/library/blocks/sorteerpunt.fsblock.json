@@ -1,0 +1,12 @@
+{
+  "format": "factorysim-block",
+  "version": 1,
+  "name": "Sorteerpunt",
+  "description": "Wielsorteerder met een aanvoerband, een band rechtdoor en een zijbaan naar links. Zet er een emitter en twee removers bij.",
+  "items": [
+    {"id": "infeed", "asset": "belt_conveyor_2m", "name": "Sorter infeed", "position": [-1.5, 0.8, 0.75], "yaw": 0},
+    {"id": "sorter", "asset": "popup_wheel_sorter", "name": "Wheel sorter", "position": [0.0, 0.8, 0.75], "yaw": 0},
+    {"id": "straight", "asset": "belt_conveyor_2m", "name": "Sorter straight", "position": [1.5, 0.8, 0.75], "yaw": 0},
+    {"id": "side", "asset": "belt_conveyor_2m", "name": "Sorter side", "position": [0.0, 0.8, -0.75], "yaw": 90}
+  ]
+}

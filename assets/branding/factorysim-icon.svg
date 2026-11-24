@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<title>FactorySim</title>
+<defs><linearGradient id="beam" gradientUnits="userSpaceOnUse" x1="100.3" y1="270.7" x2="274.1" y2="271.1"><stop offset="0" stop-color="#F5A70D" stop-opacity="0.95"/><stop offset="1" stop-color="#F5A70D" stop-opacity="0.45"/></linearGradient></defs>
+<rect x="23" y="23" width="466" height="466" rx="64" fill="#FFFFFF" stroke="#1E2A44" stroke-width="22"/>
+<path d="M104,112 L168,112 M202,112 L303,112 M357,112 L408,112 M168,83 L168,141 M202,83 L202,141 M315.7,89.1 A27,27 0 0 0 315.7,134.9 M344.3,89.1 A27,27 0 0 1 344.3,134.9" fill="none" stroke="#1E2A44" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M258.5,95 L258.5,129" fill="none" stroke="#F5A70D" stroke-width="13" stroke-linecap="round"/>
+<path d="M88.7,347.1 L337.2,236.4 C343.1,233.8 348.8,233.4 353.5,235.3 L451.9,275.1 C460.9,278.7 464.4,290.1 460.8,303.4 C457.1,316.8 447,329.2 435.7,334.2 L187.2,444.8 C181.3,447.5 175.6,447.9 171,446 L72.5,406.2 C63.6,402.6 60,391.2 63.7,377.8 C67.3,364.5 77.4,352.1 88.7,347.1 Z" fill="#45536F"/>
+<path d="M88.7,347.1 L337.2,236.4 L435.7,276.2 L187.2,386.8 Z" fill="#5A6A89"/>
+<path d="M187.2,386.8 L435.7,276.2 C450.3,269.7 462.2,277.4 462.2,293.4 C462.2,309.4 450.3,327.7 435.7,334.2 L187.2,444.8 C172.6,451.4 160.7,443.7 160.7,427.6 C160.7,411.6 172.6,393.4 187.2,386.8 Z" fill="#45536F" stroke="#1E2A44" stroke-width="10" stroke-linejoin="round"/>
+<path d="M195.4,412.2 C195.4,407.2 191.7,404.8 187.2,406.8 C182.7,408.9 179,414.5 179,419.5 C179,424.5 182.7,426.9 187.2,424.8 C191.7,422.8 195.4,417.2 195.4,412.2 Z" fill="#1E2A44"/>
+<path d="M443.9,301.5 C443.9,296.6 440.2,294.2 435.7,296.2 C431.2,298.2 427.5,303.9 427.5,308.9 C427.5,313.8 431.2,316.2 435.7,314.2 C440.2,312.2 443.9,306.5 443.9,301.5 Z" fill="#1E2A44"/>
+<path d="M88.7,347.1 L337.2,236.4 C343.1,233.8 348.8,233.4 353.5,235.3 L451.9,275.1 C460.9,278.7 464.4,290.1 460.8,303.4 C457.1,316.8 447,329.2 435.7,334.2 L187.2,444.8 C181.3,447.5 175.6,447.9 171,446 L72.5,406.2 C63.6,402.6 60,391.2 63.7,377.8 C67.3,364.5 77.4,352.1 88.7,347.1 Z" fill="none" stroke="#1E2A44" stroke-width="10" stroke-linejoin="round"/>
+<path d="M85.3,282.7 L85.3,344.7" fill="none" stroke="#1E2A44" stroke-width="8" stroke-linecap="round"/>
+<path d="M100.3,260.7 L275.8,233.7 L320.5,320.4 L100.3,280.8 Z" fill="url(#beam)"/>
+<path d="M53.8,247.9 L86.7,233.3 L116.7,245.4 L83.9,260.1 Z" fill="#56678A" stroke="#1E2A44" stroke-width="8.0" stroke-linejoin="round"/>
+<path d="M53.8,283.9 L83.9,296.1 L83.9,260.1 L53.8,247.9 Z" fill="#2A3653" stroke="#1E2A44" stroke-width="8.0" stroke-linejoin="round"/>
+<path d="M83.9,296.1 L116.7,281.4 L116.7,245.4 L83.9,260.1 Z" fill="#34425F" stroke="#1E2A44" stroke-width="8.0" stroke-linejoin="round"/>
+<path d="M92.1,283.4 L108.5,276.1 L108.5,258.1 L92.1,265.4 Z" fill="#F5A70D"/>
+<path d="M114.7,231.3 L119.1,219.1 M127.7,252.3 L139.3,244.5 M116.7,297 L124.1,308.9" fill="none" stroke="#F5A70D" stroke-width="8" stroke-linecap="round"/>
+<path d="M236.5,291.2 L311.6,321.5 L311.6,233.5 L236.5,203.2 Z" fill="#EE9A0B" stroke="#1E2A44" stroke-width="10" stroke-linejoin="round"/>
+<path d="M311.6,321.5 L406.7,279.2 L406.7,191.2 L311.6,233.5 Z" fill="#F7B21C" stroke="#1E2A44" stroke-width="10" stroke-linejoin="round"/>
+<path d="M236.5,203.2 L331.5,160.9 L406.7,191.2 L311.6,233.5 Z" fill="#FBBE2A" stroke="#1E2A44" stroke-width="10" stroke-linejoin="round"/>
+<path d="M266.6,215.3 L361.6,173 M281.6,221.4 L376.6,179.1 M266.6,215.3 L266.6,248.8 L274.1,244.8 L281.6,254.8 L281.6,221.4" fill="none" stroke="#1E2A44" stroke-width="7.0" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

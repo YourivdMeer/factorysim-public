@@ -1,0 +1,307 @@
+{
+  "format": "factorysim-scene",
+  "version": 1,
+  "name": "Assemblage",
+  "description": "Assemblage: een pick & place zet een deksel op een basis. Positioneerbalken leggen de basis in het midden en een stopblad houdt hem vast; basis en deksel samen worden een eindproduct.",
+  "items": [
+    {
+      "id": "pick_and_place-1",
+      "asset": "pick_and_place",
+      "name": "Pick and place",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "yaw": 0,
+      "params": {
+        "strokeY": 0.6
+      }
+    },
+    {
+      "id": "belt_conveyor_2m-1",
+      "asset": "belt_conveyor_2m",
+      "name": "Conveyor",
+      "position": [
+        -0.75,
+        0.8,
+        -0.75
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "emitter_gantry-1",
+      "asset": "emitter_gantry",
+      "name": "Emitter",
+      "position": [
+        -0.75,
+        0.8,
+        -1.25
+      ],
+      "yaw": 270,
+      "params": {
+        "interval": 0.1
+      },
+      "emits": "product_lid_blue"
+    },
+    {
+      "id": "diffuse_sensor-1",
+      "asset": "diffuse_sensor",
+      "name": "Sensor",
+      "position": [
+        -1.5,
+        0.83,
+        0
+      ],
+      "yaw": 90
+    },
+    {
+      "id": "belt_conveyor_4m-1",
+      "asset": "belt_conveyor_4m",
+      "name": "Conveyor 2",
+      "position": [
+        0.75,
+        0.8,
+        1
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "emitter_gantry-2",
+      "asset": "emitter_gantry",
+      "name": "Emitter 2",
+      "position": [
+        0.75,
+        0.8,
+        -0.75
+      ],
+      "yaw": 270,
+      "params": {
+        "interval": 0.1
+      },
+      "emits": "product_base_blue"
+    },
+    {
+      "id": "stop_blade-1",
+      "asset": "stop_blade",
+      "name": "Stop",
+      "position": [
+        0.75,
+        0.8,
+        0.75
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "positioning_bars-1",
+      "asset": "positioning_bars",
+      "name": "Clamp",
+      "position": [
+        0.75,
+        0.8,
+        0.5
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "diffuse_sensor-2",
+      "asset": "diffuse_sensor",
+      "name": "Sensor 2",
+      "position": [
+        1.5,
+        0.85,
+        0.5
+      ],
+      "yaw": 270
+    },
+    {
+      "id": "remover_hood_1m0-1",
+      "asset": "remover_hood_1m0",
+      "name": "Remover",
+      "position": [
+        0.75,
+        0.8,
+        3.25
+      ],
+      "yaw": 270
+    }
+  ],
+  "tags": [
+    {
+      "name": "Start button",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 0,
+      "iecAddress": "%IX0.0",
+      "variable": "IO.iStartButton"
+    },
+    {
+      "name": "Stop button",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 1,
+      "iecAddress": "%IX0.1",
+      "variable": "IO.iStopButton"
+    },
+    {
+      "name": "Sim running",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 2,
+      "iecAddress": "%IX0.2",
+      "variable": "IO.iSimRunning"
+    },
+    {
+      "name": "Pick and place moving X",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 3,
+      "iecAddress": "%IX0.3",
+      "variable": "IO.iPickAndPlaceMovingX"
+    },
+    {
+      "name": "Pick and place moving Y",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 4,
+      "iecAddress": "%IX0.4",
+      "variable": "IO.iPickAndPlaceMovingY"
+    },
+    {
+      "name": "Pick and place moving Z",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 5,
+      "iecAddress": "%IX0.5",
+      "variable": "IO.iPickAndPlaceMovingZ"
+    },
+    {
+      "name": "Pick and place item",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 6,
+      "iecAddress": "%IX0.6",
+      "variable": "IO.iPickAndPlaceItem"
+    },
+    {
+      "name": "Sensor",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 7,
+      "iecAddress": "%IX0.7",
+      "variable": "IO.iSensor"
+    },
+    {
+      "name": "Clamp open",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 8,
+      "iecAddress": "%IX1.0",
+      "variable": "IO.iClampOpen"
+    },
+    {
+      "name": "Clamp closed",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 9,
+      "iecAddress": "%IX1.1",
+      "variable": "IO.iClampClosed"
+    },
+    {
+      "name": "Sensor 2",
+      "direction": "Sensor",
+      "area": "Coil",
+      "offset": 10,
+      "iecAddress": "%IX1.2",
+      "variable": "IO.iSensor2"
+    },
+    {
+      "name": "Run lamp",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 0,
+      "iecAddress": "%QX0.0",
+      "variable": "IO.oRunLamp"
+    },
+    {
+      "name": "Pick and place X",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 1,
+      "iecAddress": "%QX0.1",
+      "variable": "IO.oPickAndPlaceX"
+    },
+    {
+      "name": "Pick and place Y",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 2,
+      "iecAddress": "%QX0.2",
+      "variable": "IO.oPickAndPlaceY"
+    },
+    {
+      "name": "Pick and place Z",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 3,
+      "iecAddress": "%QX0.3",
+      "variable": "IO.oPickAndPlaceZ"
+    },
+    {
+      "name": "Pick and place grab",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 4,
+      "iecAddress": "%QX0.4",
+      "variable": "IO.oPickAndPlaceGrab"
+    },
+    {
+      "name": "Conveyor",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 5,
+      "iecAddress": "%QX0.5",
+      "variable": "IO.oConveyor"
+    },
+    {
+      "name": "Emitter",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 6,
+      "iecAddress": "%QX0.6",
+      "variable": "IO.oEmitter"
+    },
+    {
+      "name": "Conveyor 2",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 7,
+      "iecAddress": "%QX0.7",
+      "variable": "IO.oConveyor2"
+    },
+    {
+      "name": "Emitter 2",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 8,
+      "iecAddress": "%QX1.0",
+      "variable": "IO.oEmitter2"
+    },
+    {
+      "name": "Stop",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 9,
+      "iecAddress": "%QX1.1",
+      "variable": "IO.oStop"
+    },
+    {
+      "name": "Clamp",
+      "direction": "Actuator",
+      "area": "DiscreteInput",
+      "offset": 10,
+      "iecAddress": "%QX1.2",
+      "variable": "IO.oClamp"
+    }
+  ]
+}

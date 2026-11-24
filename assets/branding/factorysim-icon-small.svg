@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<title>FactorySim (16 en 24 px)</title>
+<rect x="24" y="24" width="464" height="464" rx="72" fill="#FFFFFF" stroke="#1E2A44" stroke-width="48"/>
+<g transform="translate(256 256) scale(0.88) translate(-262 -290)">
+<path d="M88.7,347.1 L337.2,236.4 C343.1,233.8 348.8,233.4 353.5,235.3 L451.9,275.1 C460.9,278.7 464.4,290.1 460.8,303.4 C457.1,316.8 447,329.2 435.7,334.2 L187.2,444.8 C181.3,447.5 175.6,447.9 171,446 L72.5,406.2 C63.6,402.6 60,391.2 63.7,377.8 C67.3,364.5 77.4,352.1 88.7,347.1 Z" fill="#45536F" stroke="#1E2A44" stroke-width="40.9" stroke-linejoin="round"/>
+<path d="M88.7,347.1 L337.2,236.4 L435.7,276.2 L187.2,386.8 Z" fill="#5A6A89" stroke="#1E2A44" stroke-width="40.9" stroke-linejoin="round"/>
+<g transform="translate(311.6 321.5) scale(1.3) translate(-311.6 -321.5)">
+<path d="M236.5,291.2 L311.6,321.5 L311.6,233.5 L236.5,203.2 Z" fill="#EE9A0B" stroke="#1E2A44" stroke-width="17.5" stroke-linejoin="round"/>
+<path d="M311.6,321.5 L406.7,279.2 L406.7,191.2 L311.6,233.5 Z" fill="#F7B21C" stroke="#1E2A44" stroke-width="17.5" stroke-linejoin="round"/>
+<path d="M236.5,203.2 L331.5,160.9 L406.7,191.2 L311.6,233.5 Z" fill="#FBBE2A" stroke="#1E2A44" stroke-width="17.5" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

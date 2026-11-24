@@ -1,0 +1,11 @@
+{
+  "format": "factorysim-block",
+  "version": 1,
+  "name": "Invoer",
+  "description": "Emitter op een band van 4 m met een photo-eye vlak voor het eind.",
+  "items": [
+    {"id": "emitter", "asset": "emitter_gantry", "name": "Emitter", "position": [-1.5, 0.8, 0.25], "yaw": 0},
+    {"id": "belt", "asset": "belt_conveyor_4m", "name": "Infeed", "position": [0.0, 0.8, 0.25], "yaw": 0},
+    {"id": "eye", "asset": "diffuse_sensor", "name": "Infeed end", "position": [1.5, 0.9, -0.35], "yaw": 0, "params": {"range": 1.0}}
+  ]
+}

@@ -1,0 +1,21 @@
+FactorySim - wijzigingen voor testers
+
+Alleen wat je als gebruiker merkt. Je versie staat in de titelbalk en in het venster Over (menu "Help ▾" rechtsboven, "Over FactorySim").
+
+0.1.0-beta.1 (eerste beta, nog niet uitgegeven)
+  - Eerste versie voor testers.
+  - Een 3D-fabriek die je zelf ontwerpt (Ontwerpen) en laat draaien (Simuleren), met veel onderdelen:
+    banden, sensoren, pushers, sorteerders, kranen, een robotarm en meer.
+  - Besturen met je eigen PLC-programma via Modbus TCP (bijvoorbeeld CODESYS Control Win V3, experimenteel).
+  - Zonder eigen PLC: klik op "PLC: niet verbonden" en dan "Ingebouwde test-PLC". Die sorteert de
+    voorbeeldscene "MVP - sorteren op hoogte"; je hebt er geen Python of CODESYS voor nodig.
+    In een andere scene staat die knop uit; de tooltip zegt waarom.
+  - De werkbalk past vanaf een scherm van 1280 px breed: "?" en "Over" zitten in het menu "Help ▾",
+    en bij Ontwerpen staan Run, Pause en de andere simulatieknoppen niet in de werkbalk.
+  - Tag-trace (een logic analyzer), productiecijfers, tijdschaal, bouwblokken en een scènegalerij.
+  - Je scènes worden automatisch opgeslagen. Waar je bestanden en het log staan, zie je in Over.
+  - Venster Over: versie, licenties en de mappen met een knop "Map openen".
+  - Bij de eerste start een welkomstvenster met drie stappen naar een draaiende sorteerlijn; terug te vinden
+    via het menu "Help ▾" rechtsboven, "Aan de slag". Een korte handleiding staat in HANDLEIDING.txt.
+  - Een fout staat in de statusregel onderin, met een knop "Details" die het log opent. Stopt de app door
+    een fout, dan zegt een melding waar het crashbestand staat; stuur dat mee als je de fout meldt.

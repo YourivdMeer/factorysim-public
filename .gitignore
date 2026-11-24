@@ -1,0 +1,37 @@
+# Echte school-/bedrijfsprojecten: nooit committen (zie docs/SECURITY.md)
+testdata/v23-exp/echt/
+*.pro
+*.project
+*.projectarchive
+*.export
+*.library
+*.lib
+*.opt
+*.bak
+*.~u
+
+# .NET
+bin/
+obj/
+*.user
+.vs/
+TestResults/
+
+# Godot
+.godot/
+*.translation
+/export/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+tools/fake_plc/.venv/
+
+# Overig
+.env
+*.log
+Thumbs.db
+
+# Leftovers of an interrupted Godot import
+*.tmp

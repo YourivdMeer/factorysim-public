@@ -1,0 +1,113 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PLC_PRG
+VAR
+	bRun			: BOOL;
+	tonStart		: TON;		(* vertraagde start van de band *)
+	tofNaloop		: TOF;		(* naloop van de lamp *)
+	tpPuls			: TP;		(* vaste puls bij elke doos *)
+	rtDoos			: R_TRIG;	(* doos komt aan *)
+	ftDoos			: F_TRIG;	(* doos vertrekt *)
+	ctuDozen		: CTU;		(* dozenteller *)
+	ctdRest			: CTD;		(* aftellen tot batch klaar *)
+	srFout			: SR;
+	bBatchKlaar		: BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF iStop OR NOT iSimRunning THEN
+	bRun := FALSE;
+ELSIF iStart THEN
+	bRun := TRUE;
+END_IF;
+
+(* Band start 2 s na het startcommando *)
+tonStart(IN := bRun, PT := T#2s);
+
+(* Flanken van de photo-eye *)
+rtDoos(CLK := iAtPusher);
+ftDoos(CLK := iAtPusher);
+
+(* Tellen: omhoog per aangekomen doos, reset met stop *)
+ctuDozen(CU := rtDoos.Q, RESET := iStop, PV := 10);
+ctdRest(CD := ftDoos.Q, LOAD := iStart, PV := 5);
+bBatchKlaar := ctdRest.Q;
+
+(* Puls van 500 ms bij elke doos, lamp met 1 s naloop *)
+tpPuls(IN := rtDoos.Q, PT := T#500ms);
+tofNaloop(IN := bRun, PT := T#1s);
+
+(* Fout: tien dozen geteld zonder stop *)
+srFout(SET1 := ctuDozen.Q, RESET := iStop);
+
+oConveyor := tonStart.Q AND NOT srFout.Q1;
+oEmitter := tonStart.Q AND NOT bBatchKlaar;
+oPusher := tpPuls.Q;
+oRunLamp := tofNaloop.Q;
+wAantal := INT_TO_WORD(ctuDozen.CV);
+tVerstreken := tonStart.ET;
+END_PROGRAM
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @GLOBAL_VARIABLE_LIST := 'Globale_Variablen' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+VAR_GLOBAL
+	iStart			AT %IX0.0 : BOOL;
+	iStop			AT %IX0.1 : BOOL;
+	iAtPusher		AT %IX0.2 : BOOL;
+	iSimRunning		AT %IX0.6 : BOOL;
+
+	oConveyor		AT %QX0.0 : BOOL;
+	oPusher			AT %QX0.1 : BOOL;
+	oEmitter		AT %QX0.2 : BOOL;
+	oRunLamp		AT %QX0.3 : BOOL;
+	wAantal			AT %QW2 : WORD;
+
+	tVerstreken		: TIME;				(* zonder adres: alleen op naam te koppelen *)
+END_VAR
+
+(* @OBJECT_END := 'Globale_Variablen' *)
+(* @CONNECTIONS := Globale_Variablen
+FILENAME : ''
+FILETIME : 0
+EXPORT : 0
+NUMOFCONNECTIONS : 0
+*)
+
+LIBRARY
+Standard.lib 2.12.10 14:48:34
+(* @LIBRARYSYMFILEINFO := '0' *)
+NumOfPOUs: 26
+ASCIIBYTE_TO_STRING: 2048
+CONCAT: 0
+CTD: 0
+CTU: 0
+CTUD: 0
+DELETE: 0
+F_TRIG: 0
+FIND: 0
+INSERT: 0
+LEFT: 0
+LEN: 0
+MID: 0
+R_TRIG: 0
+REAL_STATE: 2048
+REPLACE: 0
+RIGHT: 0
+RS: 0
+RTC: 0
+SEMA: 0
+SR: 0
+STANDARD_VERSION: 2048
+STRING_COMPARE: 2048
+STRING_TO_ASCIIBYTE: 2048
+TOF: 0
+TON: 0
+TP: 0
+NumOfGVLs: 1
+'Global Variables 0': 0
+END_LIBRARY

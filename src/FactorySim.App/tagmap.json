@@ -1,0 +1,15 @@
+{
+  "tags": [
+    { "name": "Start button", "direction": "Sensor", "area": "Coil", "offset": 0, "iecAddress": "%IX0.0", "variable": "IO.iStart", "description": "Startknop (puls)" },
+    { "name": "Stop button", "direction": "Sensor", "area": "Coil", "offset": 1, "iecAddress": "%IX0.1", "variable": "IO.iStop", "description": "Stopknop (TRUE = ingedrukt)" },
+    { "name": "At pusher", "direction": "Sensor", "area": "Coil", "offset": 2, "iecAddress": "%IX0.2", "variable": "IO.iAtPusher", "description": "Photo-eye: doos voor de pusher" },
+    { "name": "High box", "direction": "Sensor", "area": "Coil", "offset": 3, "iecAddress": "%IX0.3", "variable": "IO.iHighBox", "description": "Hoge photo-eye: doos is hoog" },
+    { "name": "Pusher back", "direction": "Sensor", "area": "Coil", "offset": 4, "iecAddress": "%IX0.4", "variable": "IO.iPusherBack", "description": "Pusher ingetrokken" },
+    { "name": "Pusher front", "direction": "Sensor", "area": "Coil", "offset": 5, "iecAddress": "%IX0.5", "variable": "IO.iPusherFront", "description": "Pusher uitgeschoven" },
+    { "name": "Sim running", "direction": "Sensor", "area": "Coil", "offset": 6, "iecAddress": "%IX0.6", "variable": "IO.iSimRunning", "description": "Simulatie draait (niet gepauzeerd)" },
+    { "name": "Conveyor", "direction": "Actuator", "area": "DiscreteInput", "offset": 0, "iecAddress": "%QX0.0", "variable": "IO.oConveyor", "description": "Band aan" },
+    { "name": "Pusher", "direction": "Actuator", "area": "DiscreteInput", "offset": 1, "iecAddress": "%QX0.1", "variable": "IO.oPusher", "description": "Pusher uitschuiven (monostabiel)" },
+    { "name": "Emitter", "direction": "Actuator", "area": "DiscreteInput", "offset": 2, "iecAddress": "%QX0.2", "variable": "IO.oEmitter", "description": "Dozen spawnen" },
+    { "name": "Run lamp", "direction": "Actuator", "area": "DiscreteInput", "offset": 3, "iecAddress": "%QX0.3", "variable": "IO.oRunLamp", "description": "Lamp in bedrijf" }
+  ]
+}
